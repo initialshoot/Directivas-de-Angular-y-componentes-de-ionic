@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="danger">
+        <ion-title size="large">
+            Contactos
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar color="danger">
+            <ion-title size="large">Lista de contactos</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <div id="container">
+        <h2>{{saludo}}</h2>
+        <ion-item>
+            <ion-label position="floating">Nombre Completo</ion-label>
+            <ion-input clearInput type="text" [(ngModel)]="addContactos.nombre"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Telefono</ion-label>
+            <ion-input clearInput type="tel" [(ngModel)]="addContactos.telefono"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input clearInput type="mail" [(ngModel)]="addContactos.email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Notas</ion-label>
+            <ion-input clearInput type="text" [(ngModel)]="addContactos.notas"></ion-input>
+        </ion-item>
+
+        <ion-button (click)="add(addContactos)" (click)="contactoAdd()" expand="block" font-size="50">
+            <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-button><br>
+
+        <p *ngIf="contador == false">No se han añadido contactos</p>
+        <div *ngIf="contador == true">Mis Contactos <br><br>
+            <div>
+                <h6>Mostrar notas</h6>
+                <ion-toggle [(ngModel)]="valor"></ion-toggle>
+            </div>
+        </div>
+
+        <ion-toolbar *ngIf="contador == true">
+            <ion-item>
+                <ion-label>
+                    <ul>
+                        <li *ngFor="let contacto of Contactos; let i=index">
+                            <div class="notes">
+                                <ion-card>
+                                    <ion-card-title>{{contacto.nombre}}</ion-card-title><br>
+                                    <ion-card-subtitle>{{contacto.telefono}}</ion-card-subtitle><br>
+                                    <ion-card-subtitle>{{contacto.email}}</ion-card-subtitle><br>
+                                    <ion-card-subtitle>
+                                        <p *ngIf="valor">NOTAS: {{contacto.notas}}</p>
+                                    </ion-card-subtitle> <br>
+                                    <ion-button (click)="contactoDelet()">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                    </ion-button>
+
+                                </ion-card>
+                            </div>
+                        </li>
+                    </ul>
+
+                </ion-label>
+            </ion-item>
+        </ion-toolbar>
+    </div>
+</ion-content>
